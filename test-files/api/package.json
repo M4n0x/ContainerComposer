@@ -1,0 +1,13 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "Todo API for Container Compose demo",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {},
+  "author": "Container Compose Demo",
+  "license": "MIT"
+}

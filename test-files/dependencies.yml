@@ -1,0 +1,28 @@
+version: '1.0'
+
+services:
+  frontend:
+    image: "nginx:alpine"
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    environment:
+      - NGINX_PORT=80
+    
+  backend:
+    image: "node:18-alpine"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=database
+    
+  database:
+    image: "postgres:15-alpine"
+    environment:
+      - POSTGRES_DB=webapp
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password

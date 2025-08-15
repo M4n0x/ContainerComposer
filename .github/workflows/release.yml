@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+env:
+  CARGO_TERM_COLOR: always
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: macos-14
+    strategy:
+      matrix:
+        target: [x86_64-apple-darwin, aarch64-apple-darwin]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        targets: ${{ matrix.target }}
+    
+    - name: Cache cargo
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cargo/registry
+          ~/.cargo/git
+          container-compose-cli/target
+        key: ${{ runner.os }}-cargo-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
+    
+    - name: Build release binary
+      run: |
+        cd container-compose-cli
+        cargo build --release --target ${{ matrix.target }}
+    
+    - name: Create archive
+      run: |
+        cd container-compose-cli/target/${{ matrix.target }}/release
+        tar -czf container-compose-${{ matrix.target }}.tar.gz container-compose
+        mv container-compose-${{ matrix.target }}.tar.gz ../../../../
+    
+    - name: Upload Release Assets
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ./container-compose-${{ matrix.target }}.tar.gz
+        generate_release_notes: true

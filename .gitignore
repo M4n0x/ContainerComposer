@@ -1,0 +1,62 @@
+# Rust build artifacts
+container-compose-cli/target/
+container-compose-cli/Cargo.lock
+**/*.rs.bk
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node.js dependencies (test examples)
+test-files/api/node_modules/
+test-files/examples/*/node_modules/
+
+# Container Compose runtime
+.container-compose/
+*.container-compose
+
+# Logs and debugging
+*.log
+debug/
+logs/
+
+# Environment and configuration
+.env
+.env.local
+.env.*.local
+config.local.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Test artifacts
+coverage/
+test-results/
+*.test
+
+# Documentation builds
+docs/_build/
+site/
+
+# GitHub
+.github/workflows/cache/
+
+# Security and secrets
+*.pem
+*.key
+credentials.json
+.secrets
+
+# Claude Code settings
+.claude/

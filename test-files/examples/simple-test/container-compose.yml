@@ -1,0 +1,14 @@
+version: '1.0'
+
+services:
+  hello:
+    image: "alpine:latest"
+    command: ["echo", "Hello from Container Compose!"]
+    environment:
+      - TEST_VAR=test_value
+      
+  sleeper:
+    image: "alpine:latest"
+    command: ["sleep", "30"]
+    environment:
+      - SLEEP_TIME=30

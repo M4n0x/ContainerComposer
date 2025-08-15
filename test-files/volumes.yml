@@ -1,0 +1,15 @@
+version: '1.0'
+
+services:
+  app:
+    image: "nginx:alpine"
+    ports:
+      - "8080:80"
+    volumes:
+      - "./examples/simple-web-app/html:/usr/share/nginx/html:ro"
+      - "app_data:/var/lib/data"
+    environment:
+      - NGINX_PORT=80
+
+volumes:
+  app_data:
